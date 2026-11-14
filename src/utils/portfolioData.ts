@@ -74,7 +74,7 @@ export const PERSONAL_INFO = {
 export const CHARACTER_IMAGE = '/assets/giridharan_3d_avatar.png';
 export const HERO_IMAGE = CHARACTER_IMAGE;
 export const ABOUT_IMAGE = '/assets/aistudio/giridharan_about.png';
-export const ABOUT_VIDEO = '/assets/aistudio/gemini_generated_video_c4498d7b_6f820828.mp4';
+export const ABOUT_VIDEO = '/assets/aistudio/gemini_generated_video_d765c63f_0d1f6a76.mp4';
 export const SKILLS_IMAGE = '/assets/aistudio/giridharan_skills.png';
 
 export const SKILLS_CATEGORIES = [
