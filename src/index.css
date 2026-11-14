@@ -189,3 +189,16 @@
   }
 }
 
+/* Hide iOS Safari / WebKit native play-button overlay on About autoplay video */
+.about-autoplay-video::-webkit-media-controls,
+.about-autoplay-video::-webkit-media-controls-enclosure,
+.about-autoplay-video::-webkit-media-controls-panel,
+.about-autoplay-video::-webkit-media-controls-play-button,
+.about-autoplay-video::-webkit-media-controls-start-playback-button,
+.about-autoplay-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  opacity: 0 !important;
+  -webkit-appearance: none !important;
+  pointer-events: none !important;
+}
+

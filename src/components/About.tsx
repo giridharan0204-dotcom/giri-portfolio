@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import { Award, Calendar, BookOpen, Code, Globe, Compass, Lightbulb, Target } from 'lucide-react';
 import { ABOUT_VIDEO } from '../utils/portfolioData';
 
@@ -8,18 +8,112 @@ interface AboutProps {
 
 export const About: React.FC<AboutProps> = ({ isActive = true }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const isInViewRef = useRef<boolean>(false);
 
-  useEffect(() => {
+  // Set DOM attributes synchronously before paint for strict iOS Safari / WebKit autoplay rules
+  useLayoutEffect(() => {
     const el = videoRef.current;
     if (!el) return;
     el.muted = true;
     el.defaultMuted = true;
-    const ensurePlaying = () => {
-      el.play().catch(() => {});
+    el.playsInline = true;
+    el.loop = true;
+    el.autoplay = true;
+    el.controls = false;
+    el.setAttribute('muted', '');
+    el.setAttribute('playsinline', '');
+    el.setAttribute('webkit-playsinline', 'true');
+    el.setAttribute('autoplay', '');
+    el.setAttribute('loop', '');
+    el.removeAttribute('controls');
+  }, []);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    const target = videoContainerRef.current || el;
+    if (!el || !target) return;
+
+    const tryPlay = () => {
+      if (!isInViewRef.current) return;
+      el.muted = true;
+      el.defaultMuted = true;
+      el.playsInline = true;
+
+      try {
+        const playPromise = el.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay temporarily blocked; retry on next media/visibility/interaction event
+          });
+        }
+      } catch {
+        // Ignore synchronous playback restriction errors
+      }
     };
-    ensurePlaying();
-    el.addEventListener('canplay', ensurePlaying);
-    return () => el.removeEventListener('canplay', ensurePlaying);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            isInViewRef.current = true;
+            tryPlay();
+          } else {
+            isInViewRef.current = false;
+            if (!el.paused) {
+              el.pause();
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(target);
+
+    const retryIfVisible = () => {
+      if (isInViewRef.current && el.paused) {
+        tryPlay();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        retryIfVisible();
+      }
+    };
+
+    el.addEventListener('canplay', tryPlay);
+    el.addEventListener('canplaythrough', tryPlay);
+    el.addEventListener('loadeddata', tryPlay);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('touchstart', retryIfVisible, { passive: true });
+    window.addEventListener('pointerdown', retryIfVisible, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      el.removeEventListener('canplay', tryPlay);
+      el.removeEventListener('canplaythrough', tryPlay);
+      el.removeEventListener('loadeddata', tryPlay);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('touchstart', retryIfVisible);
+      window.removeEventListener('pointerdown', retryIfVisible);
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !isActive || !isInViewRef.current) return;
+    el.muted = true;
+    el.defaultMuted = true;
+    try {
+      const playPromise = el.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } catch {
+      // Ignore playback errors
+    }
   }, [isActive]);
 
   return (
@@ -58,7 +152,10 @@ export const About: React.FC<AboutProps> = ({ isActive = true }) => {
               transitionDelay: isActive ? '150ms' : '0ms',
             }}
           >
-            <div className="relative w-full max-w-[205px] sm:max-w-[320px] lg:max-w-full aspect-video flex items-center justify-center">
+            <div
+              ref={videoContainerRef}
+              className="relative w-full max-w-[205px] sm:max-w-[320px] lg:max-w-full aspect-video flex items-center justify-center"
+            >
               {/* Outer Purple Aura */}
               <div className="absolute -inset-2 rounded-2xl bg-gradient-to-tr from-[#7025B8]/30 via-[#A855F7]/35 to-transparent blur-[24px] pointer-events-none" />
 
@@ -76,7 +173,7 @@ export const About: React.FC<AboutProps> = ({ isActive = true }) => {
                   disablePictureInPicture
                   disableRemotePlayback
                   controlsList="nodownload noplaybackrate noremoteplayback"
-                  className="w-full h-full object-contain filter brightness-105 pointer-events-none"
+                  className="about-autoplay-video w-full h-full object-contain filter brightness-105 pointer-events-none"
                 />
               </div>
             </div>
