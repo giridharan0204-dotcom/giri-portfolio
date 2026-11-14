@@ -4,6 +4,7 @@ import {
   Mail,
   MapPin,
   Github,
+  Linkedin,
   CheckCircle2,
   AlertCircle,
   Copy,
@@ -228,7 +229,25 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 lg:grid-cols-1 gap-1.5 sm:gap-2">
+              <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                {/* LinkedIn Link */}
+                <a
+                  href={PERSONAL_INFO.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-[#050505] border border-white/10 hover:border-[#A855F7]/50 flex items-center gap-1.5 sm:gap-2 transition-colors group overflow-hidden"
+                >
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#A855F7]/15 flex items-center justify-center shrink-0">
+                    <Linkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A855F7] group-hover:scale-110 transition-transform" />
+                  </div>
+                  <div className="overflow-hidden min-w-0">
+                    <div className="text-[8px] sm:text-[9px] font-space text-[#A39AAE] uppercase leading-none">LINKEDIN</div>
+                    <div className="text-[10px] sm:text-xs font-space text-white truncate group-hover:text-[#A855F7] transition-colors">
+                      giri-dharan-58a7a5394
+                    </div>
+                  </div>
+                </a>
+
                 {/* GitHub Link */}
                 <a
                   href={PERSONAL_INFO.socialLinks.github}
@@ -246,17 +265,17 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
                     </div>
                   </div>
                 </a>
+              </div>
 
-                {/* Location */}
-                <div className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-[#050505] border border-white/10 flex items-center gap-1.5 sm:gap-2 overflow-hidden">
-                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#A855F7]/15 flex items-center justify-center shrink-0">
-                    <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A855F7]" />
-                  </div>
-                  <div className="overflow-hidden min-w-0">
-                    <div className="text-[8px] sm:text-[9px] font-space text-[#A39AAE] uppercase leading-none">LOCATION</div>
-                    <div className="text-[10px] sm:text-xs font-space text-white truncate">
-                      SKCET, Coimbatore
-                    </div>
+              {/* Location */}
+              <div className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-[#050505] border border-white/10 flex items-center gap-1.5 sm:gap-2 overflow-hidden">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#A855F7]/15 flex items-center justify-center shrink-0">
+                  <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A855F7]" />
+                </div>
+                <div className="overflow-hidden min-w-0">
+                  <div className="text-[8px] sm:text-[9px] font-space text-[#A39AAE] uppercase leading-none">LOCATION</div>
+                  <div className="text-[10px] sm:text-xs font-space text-white truncate">
+                    SKCET, Coimbatore, Tamil Nadu
                   </div>
                 </div>
               </div>

@@ -10,13 +10,16 @@ export const About: React.FC<AboutProps> = ({ isActive = true }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      if (isActive) {
-        videoRef.current.play().catch(() => {});
-      } else {
-        videoRef.current.pause();
-      }
-    }
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = true;
+    el.defaultMuted = true;
+    const ensurePlaying = () => {
+      el.play().catch(() => {});
+    };
+    ensurePlaying();
+    el.addEventListener('canplay', ensurePlaying);
+    return () => el.removeEventListener('canplay', ensurePlaying);
   }, [isActive]);
 
   return (
@@ -69,7 +72,7 @@ export const About: React.FC<AboutProps> = ({ isActive = true }) => {
               <div className="absolute -inset-2 rounded-2xl bg-gradient-to-tr from-[#7025B8]/30 via-[#A855F7]/35 to-transparent blur-[24px] pointer-events-none" />
 
               {/* Profile Video Frame: preserves full 16:9 aspect ratio with object-contain */}
-              <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-[#A855F7]/50 shadow-[0_0_25px_rgba(168,85,247,0.3)] bg-[#08060B] flex items-center justify-center">
+              <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-[#A855F7]/50 shadow-[0_0_25px_rgba(168,85,247,0.3)] bg-[#08060B] flex items-center justify-center pointer-events-none">
                 <video
                   ref={videoRef}
                   src={ABOUT_VIDEO}
@@ -77,7 +80,12 @@ export const About: React.FC<AboutProps> = ({ isActive = true }) => {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-contain filter brightness-105"
+                  preload="auto"
+                  controls={false}
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  controlsList="nodownload noplaybackrate noremoteplayback"
+                  className="w-full h-full object-contain filter brightness-105 pointer-events-none"
                 />
               </div>
             </div>

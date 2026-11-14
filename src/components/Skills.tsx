@@ -10,10 +10,6 @@ import {
   Shield,
   GitBranch,
   Github,
-  RotateCw,
-  Play,
-  Pause,
-  Sparkles,
 } from 'lucide-react';
 import { SKILLS_IMAGE } from '../utils/portfolioData';
 
@@ -46,25 +42,13 @@ interface SkillsProps {
 export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
   const [selectedSkill, setSelectedSkill] = useState<TechOrbiter>(TECH_ORBITERS[0]);
   const [orbitProgress, setOrbitProgress] = useState<number>(0);
-  const [isOrbiting, setIsOrbiting] = useState<boolean>(true);
-  const [orbitDirection, setOrbitDirection] = useState<number>(1);
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
-  const isOrbitingRef = useRef<boolean>(true);
   const hoveredTechRef = useRef<string | null>(null);
-  const dirRef = useRef<number>(1);
-
-  useEffect(() => {
-    isOrbitingRef.current = isOrbiting;
-  }, [isOrbiting]);
 
   useEffect(() => {
     hoveredTechRef.current = hoveredTech;
   }, [hoveredTech]);
-
-  useEffect(() => {
-    dirRef.current = orbitDirection;
-  }, [orbitDirection]);
 
   // Continuous 3D round orbital revolution (sweeps from hand to hand, loops behind head, re-emerges)
   useEffect(() => {
@@ -75,9 +59,9 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
       const delta = Math.min((now - lastTime) / 1000, 0.1);
       lastTime = now;
 
-      if (isOrbitingRef.current && !hoveredTechRef.current) {
+      if (!hoveredTechRef.current) {
         // Complete 360 degree orbit in 14 seconds
-        const step = (delta / 14) * dirRef.current;
+        const step = delta / 14;
         setOrbitProgress((prev) => {
           let next = prev + step;
           if (next >= 1) next -= 1;
@@ -93,11 +77,6 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
     return () => cancelAnimationFrame(animId);
   }, []);
 
-  const triggerReset = () => {
-    setOrbitProgress(0);
-    setIsOrbiting(true);
-  };
-
   return (
     <section
       id="skills"
@@ -108,61 +87,16 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
 
       <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between py-1.5 sm:py-3 relative z-10 min-h-0">
         
-        {/* Section Heading & Controls */}
+        {/* Section Heading */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1.5 sm:gap-2 mb-1 sm:mb-2 shrink-0">
           <div
             className={`transition-all duration-700 ${
               isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
             }`}
           >
-            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-[#100B15] border border-white/10 text-[9px] sm:text-xs font-space tracking-widest text-[#C084FC] uppercase mb-0.5 sm:mb-1">
-              <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#A855F7]" />
-              <span>SCREEN 03 // 3D ORBITAL MATRIX</span>
-            </div>
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-space font-extrabold text-white tracking-tight leading-none">
               MY CREATIVE <span className="text-[#A855F7]">TOOLKIT</span>
             </h2>
-          </div>
-
-          {/* Interactive Orbit Controls Bar */}
-          <div
-            className={`flex items-center gap-1.5 sm:gap-2 transition-all duration-700 ${
-              isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-            }`}
-            style={{ transitionDelay: '150ms' }}
-          >
-            <button
-              type="button"
-              onClick={() => setIsOrbiting(!isOrbiting)}
-              className={`px-2.5 py-1 rounded-lg border text-[10px] font-space flex items-center gap-1.5 cursor-pointer transition-colors ${
-                isOrbiting
-                  ? 'bg-[#A855F7]/15 border-[#A855F7]/40 text-[#C084FC]'
-                  : 'bg-amber-500/20 border-amber-500/40 text-amber-300'
-              }`}
-              title={isOrbiting ? 'Pause 3D Orbit' : 'Resume 3D Orbit'}
-            >
-              {isOrbiting ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-              <span>{isOrbiting ? 'ORBITING' : 'PAUSED'}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setOrbitDirection((d) => d * -1)}
-              className="px-2.5 py-1 rounded-lg bg-[#100B15] hover:bg-white/5 border border-white/15 text-[#C084FC] text-[10px] font-space flex items-center gap-1 cursor-pointer transition-colors"
-              title="Reverse Orbit Direction"
-            >
-              <RotateCw className={`w-3 h-3 transition-transform ${orbitDirection < 0 ? '-scale-x-100' : ''}`} />
-              <span className="hidden sm:inline">REVERSE</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={triggerReset}
-              className="px-2.5 py-1 rounded-lg bg-[#100B15] hover:bg-white/5 border border-white/10 text-[#A39AAE] text-[10px] font-space cursor-pointer transition-colors"
-              title="Reset Orbit Position"
-            >
-              RESET
-            </button>
           </div>
         </div>
 
@@ -171,7 +105,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             Interactive Hand-to-Hand Technology Arc Transmission
             ======================================================== */}
         <div
-          className={`relative w-full max-w-4xl mx-auto my-auto aspect-[16/9] max-h-[30dvh] sm:max-h-[42dvh] lg:max-h-[48dvh] rounded-2xl sm:rounded-3xl bg-[#100B15]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.8)] p-1.5 sm:p-4 flex items-center justify-center overflow-hidden select-none transition-all duration-1000 ${
+          className={`relative w-full max-w-5xl mx-auto my-auto aspect-[16/10] sm:aspect-[16/9] max-h-[46dvh] sm:max-h-[56dvh] lg:max-h-[60dvh] rounded-2xl sm:rounded-3xl bg-[#100B15]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.8)] p-0.5 sm:p-1.5 flex items-center justify-center overflow-hidden select-none transition-all duration-1000 ${
             isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
           style={{
@@ -234,7 +168,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             <img
               src={SKILLS_IMAGE}
               alt="Giridharan D - Technical Arsenal Extended Arms"
-              className="w-full h-full object-contain drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)] select-none pointer-events-none"
+              className="w-full h-full object-contain scale-[1.05] origin-[50%_25%] drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)] select-none pointer-events-none"
             />
             <div className="absolute -bottom-2 w-3/4 h-5 bg-black/70 rounded-full blur-xl pointer-events-none" />
           </div>

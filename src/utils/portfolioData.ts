@@ -66,7 +66,7 @@ export const PERSONAL_INFO = {
   resumeUrl: '/assets/aistudio/GIRIDHARAN_D_RESUME_89d8210b.pdf',
   socialLinks: {
     github: 'https://github.com/giridharan0204-dotcom',
-    linkedin: 'https://linkedin.com',
+    linkedin: 'https://www.linkedin.com/in/giri-dharan-58a7a5394',
     email: 'giridharan0204@gmail.com',
   },
 };
