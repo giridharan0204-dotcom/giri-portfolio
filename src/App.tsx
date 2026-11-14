@@ -8,6 +8,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { SocialRail } from './components/SocialRail';
+import { trackEvent } from './firebase';
 
 interface SlideItem {
   id: string;
@@ -124,6 +125,10 @@ export default function App() {
   }, [activeSlideIndex, scrollToSlide]);
 
   const activeSlideId = SLIDES[activeSlideIndex]?.id || 'home';
+
+  useEffect(() => {
+    trackEvent('slide_view', { slide_id: activeSlideId });
+  }, [activeSlideId]);
 
   return (
     <div className="h-screen h-[100dvh] w-full bg-[#050505] text-white selection:bg-[#A855F7]/30 selection:text-[#C084FC] relative overflow-hidden">

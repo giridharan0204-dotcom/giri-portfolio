@@ -85,10 +85,10 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
       {/* Background purple ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#7025B8]/10 blur-[150px] rounded-full pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between py-1.5 sm:py-3 relative z-10 min-h-0">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between py-1.5 sm:py-3 relative z-10 min-h-0">
         
         {/* Section Heading */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1.5 sm:gap-2 mb-1 sm:mb-2 shrink-0">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1 sm:gap-2 mb-1 sm:mb-2 shrink-0">
           <div
             className={`transition-all duration-700 ${
               isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
@@ -105,7 +105,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             Interactive Hand-to-Hand Technology Arc Transmission
             ======================================================== */}
         <div
-          className={`relative w-full max-w-5xl mx-auto my-auto aspect-[16/10] sm:aspect-[16/9] max-h-[46dvh] sm:max-h-[56dvh] lg:max-h-[60dvh] rounded-2xl sm:rounded-3xl bg-[#100B15]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.8)] p-0.5 sm:p-1.5 flex items-center justify-center overflow-hidden select-none transition-all duration-1000 ${
+          className={`relative w-full max-w-6xl mx-auto my-auto flex-1 min-h-0 max-h-[56dvh] sm:aspect-[4/3] sm:max-h-[62dvh] lg:aspect-[16/9] lg:max-h-[66dvh] rounded-2xl sm:rounded-3xl bg-[#100B15]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.8)] p-0.5 sm:p-1.5 flex items-center justify-center overflow-hidden select-none transition-all duration-1000 ${
             isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
           style={{
@@ -139,7 +139,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
           {/* Energy burst at left hand */}
           <div
             className="absolute z-25 pointer-events-none -translate-x-1/2 -translate-y-1/2"
-            style={{ left: '12%', top: '64%' }}
+            style={{ left: '10%', top: '57%' }}
           >
             <div className="relative flex items-center justify-center">
               <div className="w-10 h-10 rounded-full bg-[#A855F7]/30 blur-xl animate-pulse" />
@@ -151,7 +151,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
           {/* Energy burst at right hand */}
           <div
             className="absolute z-25 pointer-events-none -translate-x-1/2 -translate-y-1/2"
-            style={{ left: '88%', top: '64%' }}
+            style={{ left: '90%', top: '57%' }}
           >
             <div className="relative flex items-center justify-center">
               <div className="w-10 h-10 rounded-full bg-[#7025B8]/30 blur-xl animate-pulse" />
@@ -168,7 +168,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             <img
               src={SKILLS_IMAGE}
               alt="Giridharan D - Technical Arsenal Extended Arms"
-              className="w-full h-full object-contain scale-[1.05] origin-[50%_25%] drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)] select-none pointer-events-none"
+              className="w-full h-full object-contain scale-[1.14] sm:scale-[1.09] origin-[50%_20%] drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)] select-none pointer-events-none"
             />
             <div className="absolute -bottom-2 w-3/4 h-5 bg-black/70 rounded-full blur-xl pointer-events-none" />
           </div>
@@ -241,7 +241,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
                 }}
               >
                 <div
-                  className={`relative flex items-center gap-1.5 p-1 sm:p-1.5 rounded-xl backdrop-blur-md border shadow-lg transition-all duration-200 ${
+                  className={`relative flex items-center gap-1.5 p-1.5 sm:p-2 rounded-xl backdrop-blur-md border shadow-lg transition-all duration-200 ${
                     isSelected
                       ? 'border-[#A855F7] shadow-[0_0_22px_rgba(168,85,247,0.8)] ring-2 ring-[#A855F7]/50 scale-105'
                       : isHovered

@@ -60,7 +60,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-1 font-space font-extrabold text-xl sm:text-2xl tracking-tighter text-white group cursor-pointer"
           >
             <span>GD</span>
-            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#A855F7] shadow-[0_0_12px_#A855F7]" />
+            <span
+              aria-hidden="true"
+              className="text-[#A855F7] text-xl sm:text-2xl leading-none drop-shadow-[0_0_10px_rgba(168,85,247,0.85)] group-hover:scale-110 transition-transform"
+            >
+              Σ
+            </span>
           </a>
 
           {/* Desktop Navigation */}

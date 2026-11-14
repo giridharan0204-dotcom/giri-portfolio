@@ -340,13 +340,15 @@ export function validateContactForm(data: ContactFormData): ValidationResult {
     errors.fullName = 'Please enter your full name.';
   } else if (trimmedName.length < 2) {
     errors.fullName = 'Name must be at least 2 characters long.';
+  } else if (trimmedName.length > 80) {
+    errors.fullName = 'Name must be at most 80 characters long.';
   }
 
   const trimmedEmail = data.email.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!trimmedEmail) {
     errors.email = 'Please enter your email address.';
-  } else if (!emailRegex.test(trimmedEmail)) {
+  } else if (trimmedEmail.length > 120 || !emailRegex.test(trimmedEmail)) {
     errors.email = 'Please enter a valid email address (e.g., name@example.com).';
   }
 
@@ -355,6 +357,8 @@ export function validateContactForm(data: ContactFormData): ValidationResult {
     errors.subject = 'Please enter a subject.';
   } else if (trimmedSubject.length < 3) {
     errors.subject = 'Subject must be at least 3 characters.';
+  } else if (trimmedSubject.length > 120) {
+    errors.subject = 'Subject must be at most 120 characters.';
   }
 
   const trimmedMessage = data.message.trim();
@@ -362,6 +366,8 @@ export function validateContactForm(data: ContactFormData): ValidationResult {
     errors.message = 'Please write your message.';
   } else if (trimmedMessage.length < 10) {
     errors.message = 'Message must be at least 10 characters long.';
+  } else if (trimmedMessage.length > 2000) {
+    errors.message = 'Message must be at most 2000 characters long.';
   }
 
   const isValid = !Object.values(errors).some((err) => err.length > 0);

@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Shared hardened helper primitives
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'giridharan0204@gmail.com';
+    }
+
+    function isValidContactMessage(data) {
+      return data.keys().hasAll(['fullName', 'email', 'subject', 'message', 'createdAt'])
+        && data.keys().hasOnly(['fullName', 'email', 'subject', 'message', 'createdAt'])
+        && data.fullName is string
+        && data.fullName.size() >= 2
+        && data.fullName.size() <= 80
+        && data.email is string
+        && data.email.size() >= 5
+        && data.email.size() <= 120
+        && data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
+        && data.subject is string
+        && data.subject.size() >= 2
+        && data.subject.size() <= 120
+        && data.message is string
+        && data.message.size() >= 5
+        && data.message.size() <= 2000
+        && data.createdAt is timestamp
+        && data.createdAt == request.time;
+    }
+
+    // Contact form submissions: strict schema creation; admin-only PII reads & cleanup
+    match /contact_messages/{messageId} {
+      allow get: if isValidId(messageId) && isAdmin();
+      allow list: if isAdmin();
+      allow create: if isValidId(messageId) && isValidContactMessage(incoming());
+      allow update: if false;
+      allow delete: if isValidId(messageId) && isAdmin();
+    }
+  }
+}

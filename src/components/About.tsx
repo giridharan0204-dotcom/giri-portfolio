@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Award, Calendar, BookOpen, Sparkles, Code, Globe, Compass, Lightbulb, Target } from 'lucide-react';
+import { Award, Calendar, BookOpen, Code, Globe, Compass, Lightbulb, Target } from 'lucide-react';
 import { ABOUT_VIDEO } from '../utils/portfolioData';
 
 interface AboutProps {
@@ -34,15 +34,6 @@ export const About: React.FC<AboutProps> = ({ isActive = true }) => {
         
         {/* Section Heading with Mask Reveal */}
         <div className="text-center sm:text-left mb-2 sm:mb-4 shrink-0">
-          <div
-            className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-[#100B15] border border-white/10 text-[9px] sm:text-xs font-space tracking-widest text-[#C084FC] uppercase mb-1 transition-all duration-700 ${
-              isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-            }`}
-          >
-            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#A855F7]" />
-            <span>SCREEN 02 // PERSONAL PROFILE</span>
-          </div>
-
           <div className="overflow-hidden">
             <h2
               className={`text-xl sm:text-3xl lg:text-4xl font-space font-extrabold text-white tracking-tight leading-none transition-all duration-700 ease-out ${

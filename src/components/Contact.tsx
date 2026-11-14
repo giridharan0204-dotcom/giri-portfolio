@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { PERSONAL_INFO, ContactFormData, validateContactForm } from '../utils/portfolioData';
 import { downloadResumePdf, createResumePdfBlob } from '../utils/generateResumePdf';
+import { submitContactMessage, trackEvent } from '../firebase';
 
 interface ContactProps {
   isActive?: boolean;
@@ -40,6 +41,7 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
   const [showResumeModal, setShowResumeModal] = useState<boolean>(false);
   const [resumeBlobUrl, setResumeBlobUrl] = useState<string | null>(null);
@@ -65,9 +67,12 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
     if (errors[name as keyof ContactFormData]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
+    if (submitError) {
+      setSubmitError(null);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const validation = validateContactForm(formData);
@@ -77,22 +82,16 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
     }
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    setTimeout(() => {
-      try {
-        const stored = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
-        stored.push({
-          ...formData,
-          timestamp: new Date().toISOString(),
-        });
-        localStorage.setItem('portfolio_messages', JSON.stringify(stored));
-      } catch (err) {
-        // Fallback
-      }
-
-      setIsSubmitting(false);
+    try {
+      await submitContactMessage(formData);
       setIsSuccess(true);
-    }, 400);
+    } catch {
+      setSubmitError('Unable to send message right now. Please try again or email directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const copyEmailToClipboard = () => {
@@ -103,6 +102,7 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
 
   const handleDownloadResume = () => {
     downloadResumePdf('Giridharan_D_Resume.pdf');
+    trackEvent('resume_download', { file: 'Giridharan_D_Resume.pdf' });
 
     setDownloadNotice('Downloaded Giridharan_D_Resume.pdf');
     setTimeout(() => setDownloadNotice(null), 3500);
@@ -336,6 +336,7 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
                         id="fullName"
                         name="fullName"
                         type="text"
+                        maxLength={80}
                         placeholder="Your Name *"
                         value={formData.fullName}
                         onChange={handleInputChange}
@@ -357,6 +358,7 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
                         id="email"
                         name="email"
                         type="email"
+                        maxLength={120}
                         placeholder="Your Email *"
                         value={formData.email}
                         onChange={handleInputChange}
@@ -379,6 +381,7 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
                       id="message"
                       name="message"
                       rows={2}
+                      maxLength={2000}
                       placeholder="Your message or project collaboration details... *"
                       value={formData.message}
                       onChange={handleInputChange}
@@ -393,6 +396,13 @@ export const Contact: React.FC<ContactProps> = ({ isActive = true, onScrollToTop
                       </p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <p className="text-[10px] sm:text-xs text-red-400 font-inter flex items-center gap-1.5">
+                      <AlertCircle className="w-3 h-3 shrink-0" />
+                      <span>{submitError}</span>
+                    </p>
+                  )}
 
                   {/* Submit Button */}
                   <button
