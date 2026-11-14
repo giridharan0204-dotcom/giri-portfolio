@@ -10,7 +10,7 @@ export interface ProjectItem {
   tagline: string;
   description: string;
   technologies: string[];
-  category: 'Hackathon' | 'Social' | 'Security' | 'Full-Stack' | 'Web App';
+  category: 'Freelance' | 'Hackathon' | 'Social' | 'Security' | 'Full-Stack' | 'Web App';
   highlights: string[];
   badge?: string;
   githubUrl?: string;
@@ -63,7 +63,7 @@ export const PERSONAL_INFO = {
   currentYearLabel: 'Second Year',
   graduationYear: '2029',
   availabilityBadge: 'Open to Opportunities',
-  resumeUrl: '/assets/Giridharan_D_Resume.pdf',
+  resumeUrl: '/assets/aistudio/GIRIDHARAN_D_RESUME_89d8210b.pdf',
   socialLinks: {
     github: 'https://github.com/giridharan0204-dotcom',
     linkedin: 'https://linkedin.com',
@@ -196,8 +196,27 @@ export const SKILLS_DATA: SkillItem[] = [
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
-    id: 'kerala-healthmap',
+    id: 'meeting-registration',
     number: '01',
+    title: 'Meeting Registration',
+    badge: 'Freelancing Project',
+    tagline: 'Client-delivered meeting and event registration web platform',
+    description:
+      'Freelance web platform built for streamlined meeting and event registration, attendee onboarding, and responsive live deployment at tvk-meeting-registration.vercel.app.',
+    technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Vercel Deployment'],
+    category: 'Freelance',
+    highlights: [
+      'Delivered as a real-world freelancing client project',
+      'Deployed live at tvk-meeting-registration.vercel.app',
+      'Clean registration workflow and responsive interface',
+    ],
+    liveUrl: 'https://tvk-meeting-registration.vercel.app',
+    status: 'Live',
+    featured: true,
+  },
+  {
+    id: 'kerala-healthmap',
+    number: '02',
     title: 'Kerala HealthMap',
     badge: 'College-Level Winning Hackathon Project',
     tagline: 'Healthcare facility discovery and recommendation platform',
@@ -213,26 +232,6 @@ export const PROJECTS_DATA: ProjectItem[] = [
     githubUrl: 'https://github.com/giridharan0204-dotcom/kerala-healthmap',
     liveUrl: 'https://kerala-healthmap.vercel.app',
     status: 'Award Winner',
-    featured: true,
-  },
-  {
-    id: 'campus-connect',
-    number: '02',
-    title: 'Campus Connect',
-    badge: 'Student Community Platform',
-    tagline: 'Student-focused social networking platform',
-    description:
-      'Student-focused social networking platform that bridges college departments through interactive notices, peer collaboration, discussion forums, and academic project showcases.',
-    technologies: ['JavaScript', 'Interactive UI', 'CSS Grid', 'Community Architecture'],
-    category: 'Social',
-    highlights: [
-      'Departmental feeds, peer-to-peer notices, and event hubs',
-      'Interactive discussion boards with threaded comments',
-      'Student resource exchanges and project showcase modules',
-    ],
-    githubUrl: 'https://github.com/giridharan0204-dotcom/campus-connect',
-    liveUrl: 'https://campus-connect.vercel.app',
-    status: 'Concept',
     featured: true,
   },
   {
@@ -259,20 +258,20 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: 'cyberinbox',
     number: '04',
     title: 'CyberInbox',
-    badge: 'Security & Threat Platform',
-    tagline: 'Secure email and communication threat monitoring system',
+    badge: 'Hackathon Project',
+    tagline: 'Secure email and communication threat monitoring hackathon project',
     description:
-      'Secure email and communication threat monitoring platform designed to inspect message headers, identify phishing vectors, and provide intelligent threat analysis for incoming communications.',
+      'Hackathon security and threat monitoring platform designed to inspect message headers, identify phishing vectors, and provide intelligent threat analysis for incoming communications.',
     technologies: ['Java', 'Security Analysis', 'Web UI', 'SQL'],
-    category: 'Security',
+    category: 'Hackathon',
     highlights: [
+      'Built as a cybersecurity hackathon solution',
       'Automated email header and threat heuristic inspection',
       'Phishing vector identification and sender trust scoring',
-      'Secure logging and encrypted audit trail',
     ],
     githubUrl: 'https://github.com/giridharan0204-dotcom/cyberinbox',
     liveUrl: 'https://cyberinbox.vercel.app',
-    status: 'In Development',
+    status: 'Completed',
     featured: true,
   },
 ];

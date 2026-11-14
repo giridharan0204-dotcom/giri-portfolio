@@ -126,7 +126,7 @@ export default function App() {
   const activeSlideId = SLIDES[activeSlideIndex]?.id || 'home';
 
   return (
-    <div className="h-screen h-[100svh] w-full bg-[#050505] text-white selection:bg-[#A855F7]/30 selection:text-[#C084FC] relative overflow-hidden">
+    <div className="h-screen h-[100dvh] w-full bg-[#050505] text-white selection:bg-[#A855F7]/30 selection:text-[#C084FC] relative overflow-hidden">
       {/* Desktop Custom Cursor */}
       <CustomCursor />
 

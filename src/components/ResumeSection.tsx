@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
-import { ArrowDownToLine, Eye, FileText, CheckCircle2, AlertCircle, X } from 'lucide-react';
+import { ArrowDownToLine, Eye, FileText, CheckCircle2, X } from 'lucide-react';
 import { PERSONAL_INFO } from '../utils/portfolioData';
+import { downloadResumePdf } from '../utils/generateResumePdf';
 
 export const ResumeSection: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [downloadNotice, setDownloadNotice] = useState<string | null>(null);
 
   const handleDownload = () => {
-    // Triggers download of the specified resume path
-    const link = document.createElement('a');
-    link.href = PERSONAL_INFO.resumeUrl;
-    link.download = 'Giridharan_D_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    downloadResumePdf('Giridharan_D_Resume.pdf');
 
-    setDownloadNotice('Download initiated for Giridharan_D_Resume.pdf');
+    setDownloadNotice('Downloaded Giridharan_D_Resume.pdf');
     setTimeout(() => setDownloadNotice(null), 4000);
   };
 
@@ -117,7 +112,7 @@ export const ResumeSection: React.FC = () => {
 
               <div className="p-4 rounded-xl bg-[#100B16] border border-white/10">
                 <div className="font-space font-bold text-white text-sm mb-1">Notable Projects</div>
-                <div>Kerala HealthMap (Award Winner), Campus Connect, Udaan, CyberInbox</div>
+                <div>Meeting Registration (Freelancing Project), Kerala HealthMap (College-Level Winning Hackathon Project), Udaan (Hackathon Project), CyberInbox (Hackathon Project)</div>
               </div>
             </div>
 

@@ -49,22 +49,22 @@ export const Education: React.FC<EducationProps> = ({ isActive = true }) => {
       {/* Background purple ambience */}
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#7025B8]/10 blur-[130px] rounded-full pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-center pt-14 pb-4 sm:pt-16 sm:pb-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-center py-1.5 sm:py-4 relative z-10 min-h-0">
         
         {/* Section Heading with Mask Reveal */}
-        <div className="text-center sm:text-left mb-3 sm:mb-4">
+        <div className="text-center sm:text-left mb-2 sm:mb-4 shrink-0">
           <div
-            className={`inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#100B15] border border-white/10 text-[10px] sm:text-xs font-space tracking-widest text-[#C084FC] uppercase mb-1.5 transition-all duration-700 ${
+            className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-[#100B15] border border-white/10 text-[9px] sm:text-xs font-space tracking-widest text-[#C084FC] uppercase mb-1 transition-all duration-700 ${
               isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
             }`}
           >
-            <Sparkles className="w-3 h-3 text-[#A855F7]" />
+            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#A855F7]" />
             <span>SCREEN 05 // ACADEMIC FOUNDATIONS</span>
           </div>
 
           <div className="overflow-hidden">
             <h2
-              className={`text-2xl sm:text-4xl font-space font-extrabold text-white tracking-tight transition-all duration-700 ease-out ${
+              className={`text-xl sm:text-3xl lg:text-4xl font-space font-extrabold text-white tracking-tight leading-none transition-all duration-700 ease-out ${
                 isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'
               }`}
             >
@@ -75,7 +75,7 @@ export const Education: React.FC<EducationProps> = ({ isActive = true }) => {
 
         {/* Top: Academic Program Primary Card */}
         <div
-          className={`p-3.5 sm:p-5 rounded-2xl bg-[#100B15] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] mb-3 sm:mb-4 transition-all duration-800 ${
+          className={`p-2.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#100B15] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] mb-2 sm:mb-4 shrink-0 transition-all duration-800 ${
             isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
           style={{
@@ -83,53 +83,53 @@ export const Education: React.FC<EducationProps> = ({ isActive = true }) => {
             transitionDelay: isActive ? '150ms' : '0ms',
           }}
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="px-2 py-0.5 rounded-md bg-[#A855F7]/15 text-[#C084FC] text-[10px] font-space font-bold uppercase">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-0.5 sm:mb-1">
+                <span className="px-2 py-0.5 rounded-md bg-[#A855F7]/15 text-[#C084FC] text-[9px] sm:text-[10px] font-space font-bold uppercase">
                   UNDERGRADUATE PROGRAM
                 </span>
-                <span className="text-xs text-[#A39AAE] font-space">
+                <span className="text-[10px] sm:text-xs text-[#A39AAE] font-space">
                   Second Year
                 </span>
               </div>
-              <h3 className="font-space font-extrabold text-lg sm:text-2xl text-white">
+              <h3 className="font-space font-extrabold text-sm sm:text-xl lg:text-2xl text-white leading-snug">
                 Bachelor of Technology in Information Technology
               </h3>
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-[#C4BDCC] font-inter mt-1">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs text-[#C4BDCC] font-inter mt-0.5 sm:mt-1">
                 <span className="flex items-center gap-1 text-white font-medium">
-                  <GraduationCap className="w-3.5 h-3.5 text-[#A855F7]" />
+                  <GraduationCap className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A855F7] shrink-0" />
                   Sri Krishna College of Engineering and Technology (SKCET)
                 </span>
-                <span className="text-white/20">•</span>
+                <span className="text-white/20 hidden sm:inline">•</span>
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#C084FC]" />
+                  <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C084FC] shrink-0" />
                   Coimbatore, Tamil Nadu
                 </span>
               </div>
             </div>
 
             {/* CGPA Badge */}
-            <div className="px-4 py-2 sm:py-3 rounded-xl bg-[#050505] border border-[#A855F7]/40 text-center shrink-0 flex sm:flex-col items-center justify-between sm:justify-center gap-2">
-              <div className="text-[10px] font-space text-[#A39AAE] uppercase">
+            <div className="px-3 py-1.5 sm:px-4 sm:py-3 rounded-xl bg-[#050505] border border-[#A855F7]/40 text-center shrink-0 flex sm:flex-col items-center justify-between sm:justify-center gap-2">
+              <div className="text-[9px] sm:text-[10px] font-space text-[#A39AAE] uppercase">
                 ACADEMIC CGPA
               </div>
-              <div className="text-xl sm:text-3xl font-space font-black text-[#A855F7]">
+              <div className="text-lg sm:text-3xl font-space font-black text-[#A855F7]">
                 9.2
               </div>
-              <div className="text-[9px] font-space text-emerald-400 flex items-center gap-1 font-semibold">
+              <div className="text-[8px] sm:text-[9px] font-space text-emerald-400 flex items-center gap-1 font-semibold">
                 <CheckCircle2 className="w-2.5 h-2.5" />
                 DISTINCTION
               </div>
             </div>
           </div>
 
-          {/* Academic Progress Bar - Draws progressively on reveal */}
-          <div className="mt-3 pt-3 border-t border-white/10">
-            <div className="flex items-center justify-between text-[11px] font-space text-[#C4BDCC] mb-1.5">
+          {/* Academic Progress Bar */}
+          <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-white/10">
+            <div className="flex items-center justify-between text-[9px] sm:text-[11px] font-space text-[#C4BDCC] mb-1">
               <span>DEGREE TIMELINE: 2025 – 2029</span>
               <span className="text-[#A855F7] font-bold">
-                {metrics.formattedYear} ({metrics.progressPercent}%) · Graduation 2029
+                {metrics.formattedYear} ({metrics.progressPercent}%) · Grad 2029
               </span>
             </div>
             <div className="h-1.5 w-full bg-[#050505] rounded-full overflow-hidden p-0.5 border border-white/10">
@@ -144,12 +144,12 @@ export const Education: React.FC<EducationProps> = ({ isActive = true }) => {
           </div>
         </div>
 
-        {/* Bottom: 4 Milestones Grid - Reveals in Sequence */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+        {/* Bottom: 4 Milestones Grid (2x2 on mobile/tablet, 4-col on desktop) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {TIMELINE_STEPS.map((step, idx) => (
             <div
               key={idx}
-              className={`p-3 rounded-xl border transition-all duration-700 ${
+              className={`p-2 sm:p-3 rounded-xl border transition-all duration-700 flex flex-col justify-between ${
                 step.active
                   ? 'bg-[#100B15] border-[#A855F7]/60 shadow-[0_4px_20px_rgba(168,85,247,0.2)]'
                   : 'bg-[#100B15]/60 border-white/10'
@@ -159,19 +159,21 @@ export const Education: React.FC<EducationProps> = ({ isActive = true }) => {
                 transitionDelay: `${300 + idx * 110}ms`,
               }}
             >
-              <div className="flex items-center justify-between gap-1 mb-1">
-                <span className="font-space text-[10px] font-bold text-[#A855F7]">
-                  {step.year}
-                </span>
-                <span className="font-space text-[10px] text-[#A39AAE] flex items-center gap-1">
-                  <Calendar className="w-3 h-3 text-[#C084FC]" />
-                  {step.period}
-                </span>
+              <div>
+                <div className="flex items-center justify-between gap-1 mb-0.5 sm:mb-1">
+                  <span className="font-space text-[8px] sm:text-[10px] font-bold text-[#A855F7] truncate">
+                    {step.year}
+                  </span>
+                  <span className="font-space text-[8px] sm:text-[10px] text-[#A39AAE] flex items-center gap-0.5 shrink-0">
+                    <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#C084FC]" />
+                    <span className="hidden sm:inline">{step.period}</span>
+                  </span>
+                </div>
+                <h4 className="font-space font-bold text-[11px] sm:text-sm text-white mb-0.5 sm:mb-1 leading-tight">
+                  {step.title}
+                </h4>
               </div>
-              <h4 className="font-space font-bold text-xs sm:text-sm text-white mb-1">
-                {step.title}
-              </h4>
-              <p className="text-[10px] sm:text-xs text-[#C4BDCC] font-inter leading-relaxed">
+              <p className="text-[9px] sm:text-xs text-[#C4BDCC] font-inter leading-snug sm:leading-relaxed">
                 {step.desc}
               </p>
             </div>

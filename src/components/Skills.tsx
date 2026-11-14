@@ -106,20 +106,20 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
       {/* Background purple ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#7025B8]/10 blur-[150px] rounded-full pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between pt-14 pb-2 sm:pt-16 sm:pb-4 relative z-10">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between py-1.5 sm:py-3 relative z-10 min-h-0">
         
         {/* Section Heading & Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-1 sm:mb-2">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1.5 sm:gap-2 mb-1 sm:mb-2 shrink-0">
           <div
             className={`transition-all duration-700 ${
               isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
             }`}
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#100B15] border border-white/10 text-[10px] sm:text-xs font-space tracking-widest text-[#C084FC] uppercase mb-1">
-              <Sparkles className="w-3 h-3 text-[#A855F7]" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-[#100B15] border border-white/10 text-[9px] sm:text-xs font-space tracking-widest text-[#C084FC] uppercase mb-0.5 sm:mb-1">
+              <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#A855F7]" />
               <span>SCREEN 03 // 3D ORBITAL MATRIX</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-space font-extrabold text-white tracking-tight">
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-space font-extrabold text-white tracking-tight leading-none">
               MY CREATIVE <span className="text-[#A855F7]">TOOLKIT</span>
             </h2>
           </div>
@@ -171,7 +171,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             Interactive Hand-to-Hand Technology Arc Transmission
             ======================================================== */}
         <div
-          className={`relative w-full max-w-4xl mx-auto my-auto aspect-[16/9] max-h-[36vh] sm:max-h-[46vh] lg:max-h-[50vh] rounded-3xl bg-[#100B15]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.8)] p-2 sm:p-4 flex items-center justify-center overflow-visible select-none transition-all duration-1000 ${
+          className={`relative w-full max-w-4xl mx-auto my-auto aspect-[16/9] max-h-[30dvh] sm:max-h-[42dvh] lg:max-h-[48dvh] rounded-2xl sm:rounded-3xl bg-[#100B15]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.8)] p-1.5 sm:p-4 flex items-center justify-center overflow-hidden select-none transition-all duration-1000 ${
             isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
           style={{
@@ -274,8 +274,8 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             const cosVal = Math.cos(angle);
             const sinVal = Math.sin(angle);
 
-            const posX = 50 + 44 * cosVal;
-            const posY = 46 + 28 * sinVal;
+            const posX = 50 + 40 * cosVal;
+            const posY = 48 + 26 * sinVal;
 
             const isBehind = sinVal < 0;
 
@@ -354,7 +354,7 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
 
         {/* BOTTOM: Compact Interactive Technology Selector (Staggered fade) */}
         <div
-          className={`mt-1 sm:mt-2 transition-all duration-800 ${
+          className={`mt-1 sm:mt-2 shrink-0 transition-all duration-800 ${
             isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
           style={{
@@ -362,9 +362,9 @@ export const Skills: React.FC<SkillsProps> = ({ isActive = true }) => {
             transitionDelay: isActive ? '400ms' : '0ms',
           }}
         >
-          <div className="flex items-center justify-between text-[10px] font-space text-[#A39AAE] uppercase mb-1 sm:mb-1.5 px-1">
-            <span>ALL TECHNOLOGIES · CLICK TO HIGHLIGHT:</span>
-            <span className="text-[#C084FC] font-semibold">{selectedSkill.name}: {selectedSkill.desc}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-0.5 text-[9px] sm:text-[10px] font-space text-[#A39AAE] uppercase mb-1 px-1">
+            <span className="truncate">ALL TECHNOLOGIES · TAP TO HIGHLIGHT:</span>
+            <span className="text-[#C084FC] font-semibold truncate">{selectedSkill.name}: {selectedSkill.desc}</span>
           </div>
 
           <div className="grid grid-cols-5 sm:grid-cols-10 gap-1 sm:gap-1.5">

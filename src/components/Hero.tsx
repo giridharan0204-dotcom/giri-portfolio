@@ -149,10 +149,10 @@ export const Hero: React.FC<HeroProps> = ({ isActive = true }) => {
           CHOREOGRAPHED HERO CONTENT COMPOSITION
           Left: Name Mask | Center: Moving Photo | Right: Role Mask
           ──────────────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between pt-14 pb-3 sm:pt-16 sm:pb-4">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between py-2 sm:py-4 min-h-0">
         
         {/* Main 3-Column Visual Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-2 items-center my-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 lg:gap-2 items-center my-auto w-full min-h-0">
           
           {/* ========================================================
               STEP 3: LEFT SIDE — NAME REVEAL (HORIZONTAL MASK)
@@ -230,9 +230,9 @@ export const Hero: React.FC<HeroProps> = ({ isActive = true }) => {
               }}
             />
 
-            {/* Living 3D Avatar Image Container: 20-30% enlarged */}
+            {/* Living 3D Avatar Image Container */}
             <div
-              className="relative z-10 w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] flex items-center justify-center select-none"
+              className="relative z-10 w-full max-w-[260px] sm:max-w-[400px] lg:max-w-[520px] xl:max-w-[560px] flex items-center justify-center select-none"
               style={{ perspective: '1100px' }}
             >
               <div
@@ -245,7 +245,7 @@ export const Hero: React.FC<HeroProps> = ({ isActive = true }) => {
                 <img
                   src={CHARACTER_IMAGE}
                   alt="Giridharan D - 3D Cinematic Portfolio"
-                  className={`w-full h-auto max-h-[44vh] sm:max-h-[60vh] lg:max-h-[72vh] xl:max-h-[78vh] object-contain drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)] filter transition-all duration-500 ${
+                  className={`w-full h-auto max-h-[34dvh] sm:max-h-[48dvh] lg:max-h-[68dvh] xl:max-h-[74dvh] object-contain drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)] filter transition-all duration-500 ${
                     isHovered
                       ? 'drop-shadow-[0_25px_60px_rgba(168,85,247,0.4)] brightness-105'
                       : ''
@@ -277,17 +277,17 @@ export const Hero: React.FC<HeroProps> = ({ isActive = true }) => {
               <div className="hidden lg:block w-8 h-px bg-white/20" />
             </div>
 
-            <div className="relative overflow-hidden py-1">
-              <h2 className="font-space text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black italic tracking-tight text-white uppercase leading-none whitespace-nowrap">
+            <div className="relative overflow-hidden py-0.5 sm:py-1">
+              <h2 className="font-space text-2xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black italic tracking-tight text-white uppercase leading-none whitespace-nowrap">
                 SOFTWARE
               </h2>
-              <h2 className="font-space text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black italic tracking-tight text-[#C084FC] glow-text-purple uppercase leading-none mt-1 whitespace-nowrap">
+              <h2 className="font-space text-2xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black italic tracking-tight text-[#C084FC] glow-text-purple uppercase leading-none mt-0.5 sm:mt-1 whitespace-nowrap">
                 DEVELOPER
               </h2>
 
               {/* Purple curved neon stroke accent */}
               <svg
-                className="w-40 sm:w-48 lg:w-44 xl:w-52 h-5 mt-2 text-[#A855F7] overflow-visible mx-auto lg:mx-0"
+                className="w-32 sm:w-48 lg:w-44 xl:w-52 h-4 sm:h-5 mt-1 sm:mt-2 text-[#A855F7] overflow-visible mx-auto lg:mx-0"
                 viewBox="0 0 200 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ArrowDownToLine } from 'lucide-react';
-import { PERSONAL_INFO } from '../utils/portfolioData';
+import { downloadResumePdf } from '../utils/generateResumePdf';
 
 export interface NavItem {
   name: string;
@@ -43,16 +43,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const handleDownloadResume = () => {
-    const link = document.createElement('a');
-    link.href = PERSONAL_INFO.resumeUrl;
-    link.download = 'Giridharan_D_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    downloadResumePdf('Giridharan_D_Resume.pdf');
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/10 py-2.5 sm:py-3 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/10 py-2 sm:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+      style={{ paddingTop: 'max(0.5rem, env(safe-area-inset-top, 0px))' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo - Exactly matching GD. with purple dot from reference image */}

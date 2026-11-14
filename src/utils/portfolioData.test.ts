@@ -49,20 +49,31 @@ test('Skills data contains Programming, Web Development and Database categories'
   assert.ok(skillNames.includes('Firebase'));
 });
 
-test('Projects data contains all portfolio creations including Kerala HealthMap, Campus Connect, Udaan and CyberInbox', () => {
+test('Projects data contains Meeting Registration, Kerala HealthMap, Udaan and CyberInbox without Campus Connect', () => {
   assert.equal(PROJECTS_DATA.length, 4);
   const titles = PROJECTS_DATA.map((p) => p.title);
+  assert.ok(titles.includes('Meeting Registration'));
   assert.ok(titles.includes('Kerala HealthMap'));
-  assert.ok(titles.includes('Campus Connect'));
   assert.ok(titles.includes('Udaan'));
   assert.ok(titles.includes('CyberInbox'));
-  
+  assert.ok(!titles.includes('Campus Connect'));
+
+  const meeting = PROJECTS_DATA.find((p) => p.title === 'Meeting Registration');
+  assert.equal(meeting?.liveUrl, 'https://tvk-meeting-registration.vercel.app');
+  assert.equal(meeting?.badge, 'Freelancing Project');
+  assert.equal(meeting?.category, 'Freelance');
+
+  const kerala = PROJECTS_DATA.find((p) => p.title === 'Kerala HealthMap');
+  assert.match(kerala?.badge || '', /College-Level Winning Hackathon Project/i);
+  assert.equal(kerala?.category, 'Hackathon');
+
   const udaan = PROJECTS_DATA.find((p) => p.title === 'Udaan');
   assert.ok(udaan?.liveUrl?.includes('udann.vercel.app'));
   assert.equal(udaan?.category, 'Hackathon');
 
-  const kerala = PROJECTS_DATA.find((p) => p.title === 'Kerala HealthMap');
-  assert.match(kerala?.badge || '', /Winning Hackathon/i);
+  const cyber = PROJECTS_DATA.find((p) => p.title === 'CyberInbox');
+  assert.equal(cyber?.category, 'Hackathon');
+  assert.equal(cyber?.badge, 'Hackathon Project');
 });
 
 test('Interests data contains all 4 requested core areas', () => {
@@ -122,13 +133,18 @@ test('calculateAcademicMetrics returns accurate progress', () => {
 
 test('filterProjects handles category and search queries', () => {
   const hackathonResults = filterProjects(PROJECTS_DATA, 'Hackathon', '');
-  assert.equal(hackathonResults.length, 2);
+  assert.equal(hackathonResults.length, 3);
   assert.ok(hackathonResults.some((p) => p.title === 'Kerala HealthMap'));
   assert.ok(hackathonResults.some((p) => p.title === 'Udaan'));
+  assert.ok(hackathonResults.some((p) => p.title === 'CyberInbox'));
 
-  const searchResults = filterProjects(PROJECTS_DATA, 'All', 'Campus');
+  const freelanceResults = filterProjects(PROJECTS_DATA, 'Freelance', '');
+  assert.equal(freelanceResults.length, 1);
+  assert.equal(freelanceResults[0].title, 'Meeting Registration');
+
+  const searchResults = filterProjects(PROJECTS_DATA, 'All', 'Meeting');
   assert.equal(searchResults.length, 1);
-  assert.equal(searchResults[0].title, 'Campus Connect');
+  assert.equal(searchResults[0].title, 'Meeting Registration');
 
   const emptyResults = filterProjects(PROJECTS_DATA, 'All', 'NonexistentXYZ');
   assert.equal(emptyResults.length, 0);
@@ -155,5 +171,15 @@ test('validateObserverThreshold clamps out-of-range thresholds', async () => {
   assert.equal(validateObserverThreshold(-0.5), 0);
   assert.equal(validateObserverThreshold(1.5), 1);
   assert.deepEqual(validateObserverThreshold([-0.2, 0.5, 1.8]), [0, 0.5, 1]);
+});
+
+test('createResumePdfBlob generates a valid binary PDF document', async () => {
+  const { createResumePdfBlob } = await import('./generateResumePdf');
+  const blob = createResumePdfBlob();
+  assert.ok(blob.size > 60000);
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+  const text = new TextDecoder('latin1').decode(bytes);
+  assert.ok(text.startsWith('%PDF-1.7'));
+  assert.ok(text.includes('%%EOF'));
 });
 
