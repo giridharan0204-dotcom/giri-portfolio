@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #050505;
+    --bg-secondary: #100B15;
+    --bg-card: #150F1D;
+    --accent-purple: #A855F7;
+    --purple-lavender: #C084FC;
+    --purple-deep: #7025B8;
+    --text-primary: #FFFFFF;
+    --text-secondary: #C4BDCC;
+    --text-muted: #A39AAE;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --glow-purple: rgba(168, 85, 247, 0.3);
+
+    --font-space: 'Space Grotesk', -apple-system, sans-serif;
+    --font-inter: 'Inter', -apple-system, sans-serif;
+    --font-sora: 'Sora', 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-inter);
+    background-color: #050505;
+    color: #FFFFFF;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+  }
+
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  h1, h2, h3, h4, .font-space, .font-orbitron {
+    font-family: var(--font-space);
+  }
+
+  .font-sora {
+    font-family: var(--font-sora);
+  }
+
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Full-Screen Presentation Container & Snap Behavior */
+.presentation-container {
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.presentation-slide {
+  height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-height: 100vh;
+  max-height: 100svh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* Custom Purple Cinematic Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #080609;
+}
+::-webkit-scrollbar-thumb {
+  background: #17111F;
+  border-radius: 4px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7025B8;
+}
+
+/* Purple Glow & Border Utilities */
+.purple-border {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.purple-border:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.18);
+}
+
+.glow-text-purple {
+  text-shadow: 0 0 14px rgba(168, 85, 247, 0.7), 0 0 28px rgba(112, 37, 184, 0.4);
+}
+
+.glow-card-purple {
+  background-color: #17111F;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(147, 51, 234, 0.15);
+}
+
+/* 3D Living Character Animations */
+@keyframes avatarBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.012);
+  }
+}
+
+@keyframes avatarFloatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes eyeBlink {
+  0%, 96%, 100% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0.15;
+  }
+}
+
+.animate-avatar-breathe {
+  animation: avatarBreathe 4.5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.animate-avatar-float {
+  animation: avatarFloatSlow 6s ease-in-out infinite;
+}
+
+@keyframes purpleGlowPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.animate-glow-pulse {
+  animation: purpleGlowPulse 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-avatar-breathe,
+  .animate-avatar-float,
+  .animate-glow-pulse {
+    animation: none !important;
+  }
+}
+
